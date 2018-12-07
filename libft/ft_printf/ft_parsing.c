@@ -6,14 +6,15 @@
 /*   By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 12:36:55 by rmarracc          #+#    #+#             */
-/*   Updated: 2018/11/29 22:52:52 by rmarracc         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:35:13 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "../libft.h"
 
-int			ft_process_arg(const char *fmt, t_arg *flag, int i)
+int			ft_process_arg(const char *fmt, t_arg *flag, int i,
+	va_list ap)
 {
 	while (fmt[i])
 	{
@@ -24,8 +25,15 @@ int			ft_process_arg(const char *fmt, t_arg *flag, int i)
 			flag->width = ft_atoi(&fmt[i]);
 			i = ft_skip_digit(fmt, i);
 		}
+		else if (fmt[i] == '*')
+		{
+			flag->width = va_arg(ap, int);
+			if (flag->width < 0)
+				flag->minus = 1;
+			flag->width = (flag->width < 0) ? -flag->width : flag->width;
+		}
 		else if (fmt[i] == '.')
-			i = ft_parse_precision(fmt, flag, i);
+			i = ft_parse_precision(fmt, flag, i, ap);
 		else if (fmt[i] == 'h' || fmt[i] == 'l' || fmt[i] == 'L')
 			i = ft_parse_lenght(fmt, flag, i);
 		else
@@ -49,8 +57,16 @@ void		ft_parse_options(char c, t_arg *flag)
 		flag->espace = 1;
 }
 
-int			ft_parse_precision(const char *fmt, t_arg *flag, int i)
+int			ft_parse_precision(const char *fmt, t_arg *flag, int i,
+	va_list ap)
 {
+	if (fmt[i + 1] == '*')
+	{
+		flag->precision = va_arg(ap, int);
+		if (flag->precision < 0)
+			flag->precision = -1;
+		return (i + 1);
+	}
 	if (!ft_isdigit(fmt[i + 1]))
 	{
 		flag->precision = -5;

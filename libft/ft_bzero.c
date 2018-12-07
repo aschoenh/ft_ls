@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 11:46:57 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/07 13:52:00 by aschoenh         ###   ########.fr       */
+/*   Created: 2018/11/06 13:46:13 by aschoenh          #+#    #+#             */
+/*   Updated: 2018/11/08 09:52:45 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_toupper(int c)
+void	ft_bzero(void *s, size_t n)
 {
-	if (ft_islower(c))
-		return (c - 'a' + 'A');
-	return (c);
+	ft_memset(s, 0, n);
 }

@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 11:46:57 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/07 13:52:00 by aschoenh         ###   ########.fr       */
+/*   Created: 2018/11/06 11:59:37 by aschoenh          #+#    #+#             */
+/*   Updated: 2018/12/07 13:53:29 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
 
-int		ft_toupper(int c)
+char	*ft_strchr(const char *s, int c)
 {
-	if (ft_islower(c))
-		return (c - 'a' + 'A');
-	return (c);
+	char	*str;
+
+	str = (char *)s;
+	while (*str != c)
+	{
+		if (*str == '\0')
+			return (NULL);
+		str++;
+	}
+	return (str);
 }

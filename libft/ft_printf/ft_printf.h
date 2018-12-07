@@ -6,7 +6,7 @@
 /*   By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 11:57:49 by rmarracc          #+#    #+#             */
-/*   Updated: 2018/12/04 15:38:34 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:34:34 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int				ft_parse_lenght(const char *fmt, t_arg *flag, int i);
 int				ft_is_arg1(char c);
 int				ft_is_arg2(char c);
 int				ft_skip_digit(const char *fmt, int i);
-int				ft_process_arg(const char *fmt, t_arg *flag, int i);
+int				ft_process_arg(const char *fmt, t_arg *flag, int i,
+				va_list ap);
 int				ft_conversions(char c, t_arg *flag, va_list ap);
 int				ft_parse_string(va_list ap, t_arg *flag, int ret, int pad);
 int				ft_parse_char(va_list ap, t_arg *flag, int ret, int pad);

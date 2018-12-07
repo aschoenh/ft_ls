@@ -6,7 +6,7 @@
 /*   By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 12:28:46 by rmarracc          #+#    #+#             */
-/*   Updated: 2018/11/29 22:48:38 by rmarracc         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:35:27 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_parsing(const char *fmt, va_list ap,
 	{
 		if (fmt[i] == '%' && flag.arg == 0)
 		{
-			i = ft_process_arg(fmt, &flag, i + 1);
+			i = ft_process_arg(fmt, &flag, i + 1, ap);
 			flag.arg = 1;
 		}
 		else if (ft_is_arg2(fmt[i]) && flag.arg == 1)

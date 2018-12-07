@@ -6,7 +6,7 @@
 #    By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 19:03:44 by rmarracc          #+#    #+#              #
-#    Updated: 2018/12/06 15:13:54 by aschoenh         ###   ########.fr        #
+#    Updated: 2018/12/07 15:02:39 by aschoenh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,7 +16,7 @@ CC_FLAGS = -Wall -Werror -Wextra -I$(LFT_PATH)/include -O2
 
 LFT_PATH = ./libft/
 SRC_PATH = ./src/
-INC_PATH = ./include/ $(LFT_PATH)/include
+INC_PATH = ./include/ $(LFT_PATH)
 OBJ_PATH = ./obj/
 
 SRC = $(addprefix $(SRC_PATH),$(SRC_NAME))
@@ -24,7 +24,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC = $(addprefix -I,$(INC_PATH))
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = main.c
+SRC_NAME = 	main.c parsing.c create_list.c 
 
 all: $(NAME)
 
