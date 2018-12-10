@@ -6,7 +6,7 @@
 #    By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 19:03:44 by rmarracc          #+#    #+#              #
-#    Updated: 2018/12/07 15:02:39 by aschoenh         ###   ########.fr        #
+#    Updated: 2018/12/10 17:08:00 by aschoenh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -24,7 +24,7 @@ OBJ = $(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC = $(addprefix -I,$(INC_PATH))
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-SRC_NAME = 	main.c parsing.c create_list.c 
+SRC_NAME = 	main.c parsing.c create_list.c utils.c display.c 
 
 all: $(NAME)
 

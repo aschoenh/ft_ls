@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/07 18:03:06 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:08:29 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ long				time;      /* deriere modif, a recup avec ctime*/
 time_t				time_set;
 nlink_t   			st_nlink;    /* Nb liens matériels */
 blkcnt_t			st_blocks;   /* Nombre de blocs alloués */
-t_list				*next;
+struct s_file_list	*next;
 }					t_file_list;
 
 /***********/
@@ -59,6 +59,24 @@ int					ft_ls_parse_options(char flag, int *options);
 /***********/
 
 t_file_list			*ft_ls_list_files(char **av, int c, int i);
-t_file_list			ft_ls_get_files(int ac, char **av, int options);
+int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
+						t_file_list **lst);
 
+
+/***********/
+/**DISPLAY**/
+/***********/
+
+void				ft_ls_display(int options, t_file_list *file, int ac);
+
+
+/***********/
+/***UTILS***/
+/***********/
+
+void				ft_list_clear(t_file_list **beggin_list);
+int					ft_list_longest_name(t_file_list **lst);
+void				ft_lst_swap(t_file_list **file1, t_file_list *file2);
+void				ft_list_sort(t_list **begin_list, int (*cmp)());
+int					ft_get_int_len(int n);
 # endif

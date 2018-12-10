@@ -6,12 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:37:13 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/07 18:03:10 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/10 17:08:38 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
 #include <errno.h>
 
 int		ft_ls_parsing(int ac, char **av, int *options)
@@ -20,7 +19,7 @@ int		ft_ls_parsing(int ac, char **av, int *options)
 	int			i;
 	(void)		ac;
 
-	ret = 0;
+	ret = 900000;
 	*options = 0;
 	i = 1;
 	if (av[1][0] == '-' && (av[1][1]))
@@ -54,16 +53,22 @@ int		ft_ls_parse_options(char flag, int *options)
 }
 
 
-int		ft_ls_error(int error, char *s, int index)
+int		ft_ls_error(int error, char *str, int index)
 {
 	if (error == USAGE)
 	{
 		ft_putstr_fd("ft_ls: illegal option -- ", 2);
-		ft_putchar_fd(s[index], 2);
+		ft_putchar_fd(str[index], 2);
 		ft_putchar_fd('\n', 2);
 		ft_putendl_fd("usage: ft_ls [-alRrt] [file ...]", 2);
 	}
-
+	if (error == ERRNO)
+	{
+		ft_putstr_fd("ls: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(strerror(ERRNO), 2);
+	}
 	if (error == USAGE || error == MALL_ERR)
 		exit(EXIT_FAILURE);
 	return (0);
