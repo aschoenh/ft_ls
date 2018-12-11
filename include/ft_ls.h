@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/11 16:56:20 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/11 19:42:37 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ void				display_rest(t_file_list **file, int options);
 /***SORT****/
 /***********/
 
-void				ft_list_reverse(t_file_list **lst);
-void				ft_list_sort(t_file_list **begin_list, int (*cmp)());
-
+void				ft_sort_list(t_file_list **lst, int options);
 
 
 /***********/
@@ -86,7 +84,7 @@ void				ft_list_sort(t_file_list **begin_list, int (*cmp)());
 
 void				ft_list_clear(t_file_list **beggin_list);
 int					ft_list_longest_name(t_file_list **lst);
-void				ft_lst_swap(t_file_list **file1, t_file_list *file2);
+t_file_list			*ft_lst_swap(t_file_list *file1, t_file_list *file2);
 int					ft_get_int_len(int n);
 
 # endif
