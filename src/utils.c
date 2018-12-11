@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:25:31 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/10 17:08:27 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/11 16:56:17 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void			ft_lst_swap(t_file_list **file1, t_file_list *file2)
 	(*file1)->next = (*file2)->next;
 	(*file2)->next = *file1;
 }*/
-/*
-void			ft_list_sort(t_list **begin_list, int (*cmp)())
+
+void			ft_list_sort(t_file_list **begin_list, int (*cmp)())
 {
 	t_file_list	*current;
 	t_file_list	*current2;
@@ -64,18 +64,18 @@ void			ft_list_sort(t_list **begin_list, int (*cmp)())
 		current2 = *begin_list;
 		while (current2->next)
 		{
-			if ((*cmp)(current2->data, current2->next->data) > 0)
+			if ((*cmp)(current2->name, current2->next->name) > 0)
 			{
-				next = current2->data;
-				current2->data = current2->next->data;
-				current2->next->data = next;
+				next = current2->name;
+				current2->name = current2->next->name;
+				current2->next->name = next;
 			}
 			current2 = current2->next;
 		}
 		current = current->next;
 	}
 }
-*/
+
 
 int				ft_get_int_len(int n)
 {

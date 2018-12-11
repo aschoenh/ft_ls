@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 11:16:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/07 13:51:52 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/11 15:53:48 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ int				get_next_line(const int fd, char **line);
 size_t			ft_strlen_eol(char *s);
 char			*ft_strndup(char *src, size_t len);
 
-
+int				ft_printf(const char *fmt, ...);
 #endif
