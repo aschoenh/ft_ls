@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/11 19:42:37 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/12 18:57:27 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <uuid/uuid.h>
 # include <time.h>
 # include <sys/types.h>
-# include <sys/acl.h>
 # include <sys/xattr.h>
 # include <limits.h>
 # include <stdlib.h>
@@ -36,7 +35,7 @@ char				path[PATH_MAX]; /*full path du fichier*/
 unsigned char		d_type;      /* type du fichier */
 int					st_mode;     /* Protection */
 uid_t				st_uid;      /* UID propriétaire */
-gid_t				st_gid;		/* GIF proprietaire */
+gid_t				st_gid;		/* GID proprietaire */
 dev_t				st_rdev;   /* ID périphérique (si fichier spécial) */
 off_t				st_size;     /* Taille totale en octets */
 long				time;      /* deriere modif, a recup avec ctime*/

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:23:58 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/11 19:25:16 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:42:50 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void				ft_ls_display(int options, t_file_list *file, int ac)
 	t_file_list		*lst;
 	int				isfirst;
 
-	(void) options;
 	lst = file;
 	isfirst = 0;
 	while (lst)
@@ -66,7 +65,7 @@ void				ft_ls_display(int options, t_file_list *file, int ac)
 			display_path(lst->path, ac, &isfirst);
 			if ((file = read_directory(lst->path, lst->name, options)))
 			{
-				display_files(&file, options);
+				ft_ls_display_files(&file, options);
 				display_rest(&file, options);
 				ft_list_clear(&file);
 			}

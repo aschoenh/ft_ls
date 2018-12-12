@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:37:13 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/11 16:06:25 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/12 16:56:54 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_ls_parsing(int ac, char **av, int *options)
 	ret = 900000;
 	*options = 0;
 	i = 1;
-	if (av[1][0] == '-' && (av[1][1]))
+	if (av[1][0] == '-' && (av[1][1])) // flags separes
 	{
 		while (av[1][i])
 		{

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:14:00 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/11 16:56:19 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/12 18:07:58 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_file_list		*ft_ls_list_files(char **av, int ac, int i)
 int			main(int ac, char **av)
 {
 	int			i;
-	int			options; // l = 10000 R = 1000 a = 100 r = 10 t =1
+	int			options; // l = 20000 R = 2000 a = 200 r = 20 t = 2
 	t_file_list	*file;
 
 	if ((i = ft_ls_parsing(ac, av, &options)) == -1)
