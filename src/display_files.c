@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/12 18:57:24 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/13 18:27:31 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,32 @@ static void			display_simple_list(t_file_list *lst, int options)
 	}						// a voir si il faut encore gerer le -a ou si il est deja gere avant
 }
 
-static int			*get_col_size(t_file_list *lst, int *size[7], int options)
+static int			get_col_size(t_file_list *lst, int size[7], int options)
 {
-	int i;
 	int	len_major;
 	int	len_minor;
 	int	total_blocks;
 
 	len_major = 0;
 	len_minor = 0;
+	total_blocks = 0;
 	while (lst)
 	{
-		i = 0;
 		if (((options / 10000) + 3) % 5 == 0)
-			size[i] = ft_max(ft_get_int_len(lst->st_blocks, size[i++]));
-		size[i] = ft_max(ft_get_int_len(lst->st_nlink, size[i++]));
-		size[i] = ft_max(ft_strlen(getpwuid(lst->st_uid)->pw_name), size[i++]);
-		size[i] = ft_max(ft_strlen(getgrgid(lst->st_gid)->gr_name), size[i++]);
+			size[0] = ft_max(ft_get_int_len(lst->st_blocks), size[0]);
+		size[1] = ft_max(ft_get_int_len(lst->st_nlink), size[1]);
+		size[2] = ft_max(ft_strlen(getpwuid(lst->st_uid)->pw_name), size[2]);
+		size[3] = ft_max(ft_strlen(getgrgid(lst->st_gid)->gr_name), size[3]);
 		// is IS_CHR 
 		//else
-		len_major = ft_max(ft_get_int_len(major(file->st_rdev), len_major));
-		len_minor = ft_max(ft_get_int_len(minor(file->st_rdev), len_minor));
-		size[i] = ft_max((len_major + len_minor + 2), size[i++]);
+		len_major = ft_max(ft_get_int_len(major(lst->st_rdev)), len_major);
+		len_minor = ft_max(ft_get_int_len(minor(lst->st_rdev)), len_minor);
+		size[4] = ft_max((len_major + len_minor + 2), size[4]);
 		total_blocks += lst->st_blocks;
 		lst = lst->next;
 	}
 	//size?
-	return (total_blocks)
+	return (total_blocks);
 }
 
 static void			display_l_list(t_file_list *lst, int options)
@@ -57,7 +56,7 @@ static void			display_l_list(t_file_list *lst, int options)
 	int				total_blocks;
 	int				isfirst;
 
-	total_blocks = get_col_size(lst, &size, options);
+	total_blocks = get_col_size(lst, size, options);
 	isfirst = 1;
 	while (lst)
 	{

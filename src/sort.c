@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:05:33 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/12 17:11:16 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/13 17:00:38 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,47 @@ static t_file_list	*ft_list_sort_time(t_file_list *lst)
 	return (lst);
 }
 
+t_file_list        *ft_list_sort_block(t_file_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->next && lst->st_blocks > lst->next->st_blocks)
+		lst = ft_lst_swap(lst, lst->next);
+	else if (lst->next && lst->st_blocks == lst->next->st_blocks)
+		if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
+			lst = ft_lst_swap(lst, lst->next);
+	lst->next = ft_list_sort_block(lst->next);
+	if (lst->next && lst->st_blocks > lst->next->st_blocks)
+	{
+		lst = ft_lst_swap(lst, lst->next);
+		lst->next = ft_list_sort_block(lst->next);
+	}
+	else if (lst->next && lst->st_blocks == lst->next->st_blocks)
+	{
+		if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
+		{
+			lst = ft_lst_swap(lst, lst->next);
+			lst->next = ft_list_sort_block(lst->next);
+		}
+	}
+	return (lst);
+}
+
+static t_file_list	*ft_list_sort_ascii(t_file_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
+		lst = ft_lst_swap(lst, lst->next);
+	lst->next = ft_list_sort_block(lst->next);
+	if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
+	{
+		lst = ft_lst_swap(lst, lst->next);
+		lst->next = ft_list_sort_block(lst->next);
+	}
+	return (lst);
+}
+
 void				ft_sort_list(t_file_list **lst, int options)
 {
 	int				optionss;
@@ -67,7 +108,7 @@ void				ft_sort_list(t_file_list **lst, int options)
 
 	optionss = options;
 	optionsss = options;
-//	*lst = ft_list_sort(lst, (ft_strcmp*)(lst, lst->next);
+	*lst = ft_list_sort_ascii(*lst);
 		if (((optionsss / 10) + 3) % 5 == 0)
 			ft_list_reverse(lst);
 		if ((optionss + 3) % 5 == 0)

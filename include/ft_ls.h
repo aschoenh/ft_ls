@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/12 18:57:27 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/13 18:37:23 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <uuid/uuid.h>
 # include <time.h>
 # include <sys/types.h>
-# include <sys/xattr.h>
 # include <limits.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 enum				{ERRNO, USAGE, MALL_ERR};
 
@@ -43,6 +43,7 @@ time_t				time_set;
 nlink_t   			st_nlink;    /* Nb liens matériels */
 blkcnt_t			st_blocks;   /* Nombre de blocs alloués */
 struct s_file_list	*next;
+struct s_list		list;
 }					t_file_list;
 
 /***********/
@@ -67,8 +68,9 @@ int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 /***********/
 
 void				ft_ls_display(int options, t_file_list *file, int ac);
-void				display_files(t_file_list **file, int options);
+void				ft_ls_display_files(t_file_list **file, int options);
 void				display_rest(t_file_list **file, int options);
+void				display_ls_lx(t_file_list *file, int size[7], int options);
 
 /***********/
 /***SORT****/
@@ -85,5 +87,6 @@ void				ft_list_clear(t_file_list **beggin_list);
 int					ft_list_longest_name(t_file_list **lst);
 t_file_list			*ft_lst_swap(t_file_list *file1, t_file_list *file2);
 int					ft_get_int_len(int n);
+int					ft_max(int a, int b);
 
 # endif
