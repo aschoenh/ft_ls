@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 15:02:30 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/13 18:11:20 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:49:34 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int			ft_ls_get_path(char path[PATH_MAX], char file[NAME_MAX + 1],
 	j = -1;
 	while (path[++i])
 		elempath[i] = path[i];
-	if (elempath[i] && i < PATH_MAX) // path[0] != / et path [1] != [\0]?
+	if (i && i < PATH_MAX)
 		elempath[i++] = '/';
 	while (file[++j] && i < PATH_MAX)
 		elempath[i++] = file[j];
@@ -68,13 +68,17 @@ int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 	char			elempath[PATH_MAX] = {0};
 	struct stat		info;
 
+//	ft_printf("\n\n\n   file : %s", file);
+//	ft_printf("\n   path : %s", path);
 	if (!(ft_ls_get_path(path, file, elempath)))
 	{
 		ft_ls_error(1, file, 0);
 		return (-1);
 	}
+//	ft_printf("\n   elempath : %s", elempath);
 	if ((lstat(elempath, &info) == -1))
 		return (-1);
+//	ft_printf("\n   info : %d|||", info.st_nlink);
 	if (!*lst)
 		*lst = get_file(file, path, info);
 	else

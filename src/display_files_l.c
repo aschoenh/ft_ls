@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/13 17:30:28 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/14 18:03:23 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void		get_and_display_time(t_file_list *file)
 	char		*t;
 
 	time(&actual);
-	t = ctime(&(file->time_set)) + 4;
+	t = ctime(&(file->time)) + 4;
 	ft_printf(" %.12s ", t);
 }
 

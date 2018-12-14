@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/13 18:37:23 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:29:12 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 
 enum				{ERRNO, USAGE, MALL_ERR};
 
+typedef struct		s_file_n
+{
+	void			*content;
+	size_t			content_size;
+	struct s_file_n	*next;
+}					t_file_n;
+
 typedef struct		s_file_list
 {
 char				name[NAME_MAX + 1]; /* nom du fichier */
@@ -43,7 +50,7 @@ time_t				time_set;
 nlink_t   			st_nlink;    /* Nb liens matériels */
 blkcnt_t			st_blocks;   /* Nombre de blocs alloués */
 struct s_file_list	*next;
-struct s_list		list;
+t_file_n			*new_dim;
 }					t_file_list;
 
 /***********/
@@ -58,7 +65,7 @@ int					ft_ls_parse_options(char flag, int *options);
 /***LISTS***/
 /***********/
 
-t_file_list			*ft_ls_list_files(char **av, int c, int i);
+t_file_list			*ft_ls_list_files(char **av, int c, int i, int isfirst);
 int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 						t_file_list **lst);
 
@@ -67,7 +74,7 @@ int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 /**DISPLAY**/
 /***********/
 
-void				ft_ls_display(int options, t_file_list *file, int ac);
+void				ft_ls_display(int options, t_file_list *file, int ac, int isfirst);
 void				ft_ls_display_files(t_file_list **file, int options);
 void				display_rest(t_file_list **file, int options);
 void				display_ls_lx(t_file_list *file, int size[7], int options);
@@ -77,6 +84,7 @@ void				display_ls_lx(t_file_list *file, int size[7], int options);
 /***********/
 
 void				ft_sort_list(t_file_list **lst, int options);
+int					sort_args(char **av, int ac, int i);
 
 
 /***********/

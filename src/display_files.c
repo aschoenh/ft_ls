@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/13 18:27:31 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:29:09 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void			display_simple_list(t_file_list *lst, int options)
 	(void) 			options;
 	while (lst)
 	{
-		ft_printf("%s", lst->name);
+		ft_printf("%s\n", lst->name);
 		lst = lst->next;
-	}						// a voir si il faut encore gerer le -a ou si il est deja gere avant
+	}
 }
 
 static int			get_col_size(t_file_list *lst, int size[7], int options)
@@ -62,7 +62,7 @@ static void			display_l_list(t_file_list *lst, int options)
 	{
 		if (isfirst == 1)
 		{
-			ft_printf("total %s\n", total_blocks);
+			ft_printf("total %d\n", total_blocks);
 			isfirst--;
 		}
 		display_ls_lx(lst, size, options);
