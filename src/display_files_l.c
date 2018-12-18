@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 18:03:23 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/18 19:12:26 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,16 @@ void			display_ls_lx(t_file_list *file, int size[7], int options)
 	if (((options / 100000) + 3) % 5 == 0)
 		ft_printf("%*hu", size[0], file->st_blocks);
 	get_and_display_chmod(file, chmod);
-	ft_printf(" %*hu", size[1], file->st_nlink);
+	ft_printf("  %*hu", size[1], file->st_nlink);
 	ft_printf(" %-*s", size[2], getpwuid(file->st_uid)->pw_name);
 	ft_printf("  %-*s", size[3], getgrgid(file->st_gid)->gr_name);
-	//major minor
+	if (chmod[0] != 'c' && chmod[0] != 'b')
+		ft_printf("  %*lld", size[4], file->st_size);
+	else
+	{
+		ft_printf("   %*d", size[5], major(file->st_rdev));
+		ft_printf(",   %*d", size[6], minor(file->st_rdev));
+	}
 	get_and_display_time(file);	
 	if (chmod[0] != 'l')
 		ft_printf("%s", file->name);

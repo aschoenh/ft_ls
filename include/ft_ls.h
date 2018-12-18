@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 19:29:12 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/18 22:26:14 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int					ft_ls_parse_options(char flag, int *options);
 /***LISTS***/
 /***********/
 
-t_file_list			*ft_ls_list_files(char **av, int c, int i, int isfirst);
+t_file_list			*ft_ls_list_files(char **av, int c, int *i, int isfirst);
 int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 						t_file_list **lst);
 
@@ -75,7 +75,7 @@ int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 /***********/
 
 void				ft_ls_display(int options, t_file_list *file, int ac, int isfirst);
-void				ft_ls_display_files(t_file_list **file, int options);
+void				ft_ls_display_files(t_file_list **file, int options, int count);
 void				display_rest(t_file_list **file, int options);
 void				display_ls_lx(t_file_list *file, int size[7], int options);
 
@@ -83,8 +83,8 @@ void				display_ls_lx(t_file_list *file, int size[7], int options);
 /***SORT****/
 /***********/
 
-void				ft_sort_list(t_file_list **lst, int options);
-int					sort_args(char **av, int ac, int i);
+void				ft_sort_list(t_file_list **lst, int options, int count);
+int					sort_args(char **av, int ac, int i, int *count);
 
 
 /***********/

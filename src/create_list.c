@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 15:02:30 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 15:49:34 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/18 18:26:09 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,27 @@ static int			ft_ls_get_path(char path[PATH_MAX], char file[NAME_MAX + 1],
 	return (0);
 }
 
-static t_file_list	*get_file(char *file, char *path, struct stat stat)
+static t_file_list	*get_file(char *file, char *path, struct stat *stat)
 {
 	t_file_list		*elem;
 	int				i;
 
 	if (!(elem = (t_file_list*)ft_memalloc(sizeof(t_file_list))))
+	{
 		ft_ls_error(2, NULL, 0);
+	}
 	i = -1;
 	while (file[++i])
 		elem->name[i] = file[i];
-	elem->st_nlink = stat.st_nlink;
-	elem->st_uid = stat.st_uid;
-	elem->st_gid = stat.st_gid;
-	elem->st_mode = stat.st_mode;
-	elem->st_size = stat.st_size;
-	elem->st_rdev = stat.st_rdev;
-	elem->time = stat.st_mtimespec.tv_sec;
-	elem->time_set = stat.st_mtimespec.tv_nsec;
-	elem->st_blocks = stat.st_blocks;
+	elem->st_nlink = stat->st_nlink;
+	elem->st_uid = stat->st_uid;
+	elem->st_gid = stat->st_gid;
+	elem->st_mode = stat->st_mode;
+	elem->st_size = stat->st_size;
+	elem->st_rdev = stat->st_rdev;
+	elem->time = stat->st_mtimespec.tv_sec;
+	elem->time_set = stat->st_mtimespec.tv_nsec;
+	elem->st_blocks = stat->st_blocks;
 	ft_ls_get_path(path, file, elem->path);
 	elem->next = NULL;
 	return (elem);
@@ -65,27 +67,25 @@ static t_file_list	*get_file(char *file, char *path, struct stat stat)
 int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 										t_file_list **lst)
 {
-	char			elempath[PATH_MAX] = {0};
+	char			elempath[PATH_MAX] = {0}; // on a le droit?
 	struct stat		info;
 
-//	ft_printf("\n\n\n   file : %s", file);
-//	ft_printf("\n   path : %s", path);
 	if (!(ft_ls_get_path(path, file, elempath)))
 	{
 		ft_ls_error(1, file, 0);
 		return (-1);
 	}
-//	ft_printf("\n   elempath : %s", elempath);
 	if ((lstat(elempath, &info) == -1))
+	{
 		return (-1);
-//	ft_printf("\n   info : %d|||", info.st_nlink);
+	}
 	if (!*lst)
-		*lst = get_file(file, path, info);
+		*lst = get_file(file, path, &info);
 	else
 	{
 		while ((*lst)->next)
 			lst = &((*lst)->next);
-		(*lst)->next = get_file(file, path, info);
+		(*lst)->next = get_file(file, path, &info);
 	}
 	return (1);
 }

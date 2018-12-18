@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:05:33 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 16:53:02 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/18 22:25:56 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,26 @@ static t_file_list	*ft_list_sort_ascii(t_file_list *lst)
 		return (NULL);
 	if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
 		lst = ft_lst_swap(lst, lst->next);
-	lst->next = ft_list_sort_block(lst->next);
+	lst->next = ft_list_sort_ascii(lst->next);
 	if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
 	{
 		lst = ft_lst_swap(lst, lst->next);
-		lst->next = ft_list_sort_block(lst->next);
+		lst->next = ft_list_sort_ascii(lst->next);
 	}
 	return (lst);
 }
 
-void				ft_sort_list(t_file_list **lst, int options)
+void				ft_sort_list(t_file_list **lst, int options, int count)
 {
 	int				optionss;
 	int				optionsss;
 
 	optionss = options;
 	optionsss = options;
-	*lst = ft_list_sort_ascii(*lst);
-		if (((optionsss / 10) + 3) % 5 == 0)
-			ft_list_reverse(lst);
-		if ((optionss + 3) % 5 == 0)
-			*lst = ft_list_sort_time(*lst);
+	if (count < 1)
+		*lst = ft_list_sort_ascii(*lst);
+	if ((optionss + 3) % 5 == 0)
+		*lst = ft_list_sort_time(*lst);
+	if (((optionsss / 10) + 3) % 5 == 0)
+		ft_list_reverse(lst);
 }

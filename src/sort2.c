@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:53:10 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 17:16:14 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/18 21:30:53 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,58 @@
 
 void static		ft_swap(char **s1, char **s2)
 {
-	void	*tmp;
+	void		*tmp;
 
 	tmp = *s1;
 	*s1 = *s2;
 	*s2 = tmp;
 }
 
-int				sort_args(char **av, int ac, int i)
+int static		sort_types(char **av, int ac, int beg)
 {
-	int j;
+	int			i;
+	int			k;
+	struct stat st[ac];
 
-	j = 1;
-	while (i < ac - 1)
+	i = beg;
+	while (i < ac)
+	{
+		stat(av[i], &st[i]);
+		i++;
+	}
+	i = beg;
+	while (!(S_ISDIR(st[i].st_mode)))
+		i++;
+	k = i++;
+	while (i < ac)
+	{
+		if (!(S_ISDIR(st[i].st_mode)))
+		{
+			if (i != k)
+			{
+				ft_swap(&av[i], &av[k]);
+				k++;
+			}
+		}
+			i++;
+	}
+	i = beg;
+	while (i < ac)
+	{
+		stat(av[i], &st[i]);
+		if (!(S_ISDIR(st[i].st_mode)))
+			i++;
+		else
+			break ;
+	}
+	return (i);
+}
+
+int				sort_args(char **av, int ac, int i, int *count)
+{
+
+	*count = sort_types(av, ac, i);
+	while (i < *count - 1)
 	{
 		if (ft_strcmp(av[i], av[i + 1]) > 0)
 		{
@@ -36,6 +75,16 @@ int				sort_args(char **av, int ac, int i)
 		else
 			i++;
 	}
-	i = 1;
-	return (0);
+	i = *count;
+	while (i + 1 < ac)
+	{
+		if (ft_strcmp(av[i], av[i + 1]) > 0)
+		{
+			ft_swap(&av[i], &av[i + 1]);
+			i = *count;
+		}
+		else
+			i++;
+	}
+	return (*count);
 }
