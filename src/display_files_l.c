@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 19:12:26 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:29:40 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,25 @@ static void		get_and_display_time(t_file_list *file)
 	char		*t;
 
 	time(&actual);
-	t = ctime(&(file->time)) + 4;
-	ft_printf(" %.12s ", t);
+//	ft_printf("}{}%s{}{", act);
+//	ft_printf("'''%s'''", ctime(&(file->time)));
+//	ft_printf("===%d===", time - file->time);
+//	if ((actual - file->time) < ((365 / 2) * 86400) && actual - file->time > 0)
+//	{
+		t = ctime(&(file->time)) + 4;
+		ft_printf(" %.12s ", t);
+//	}
+/*	else
+	{
+		
+		t = ctime(&(file->time)) + 4;
+		ft_printf(" %.6s ", t);
+		t += 15;
+		t = ft_strrev(t);
+		t += 1;
+		t = ft_strrev(t);
+		ft_printf("%s ", t);
+	}*/
 }
 
 void			display_ls_lx(t_file_list *file, int size[7], int options)

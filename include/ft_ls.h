@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 22:26:14 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:24:00 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void				display_ls_lx(t_file_list *file, int size[7], int options);
 
 void				ft_sort_list(t_file_list **lst, int options, int count);
 int					sort_args(char **av, int ac, int i, int *count);
-
+void				ft_list_merge(t_file_list **begin_list1, t_file_list *begin_list2);
 
 /***********/
 /***UTILS***/

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:05:33 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 22:25:56 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:30:12 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,51 @@ void				ft_sort_list(t_file_list **lst, int options, int count)
 {
 	int				optionss;
 	int				optionsss;
+	t_file_list		*lst1;
+	t_file_list		*lst2;
+	int				i;
+
+	i = 0;
+	lst1 = NULL;
+	if (count > 0)
+	{
+	lst1 = *lst;
+	lst2 = lst1;
+		while (lst1 && i < count && count > 0)
+		{
+			if (i < count)
+				lst1 = lst1->next;
+			i++;
+		}
+		while (lst2 && --i && count > 0)
+			lst2 = lst2->next;
+		lst2->next = NULL;
+	}
 
 	optionss = options;
 	optionsss = options;
 	if (count < 1)
 		*lst = ft_list_sort_ascii(*lst);
 	if ((optionss + 3) % 5 == 0)
+	{
 		*lst = ft_list_sort_time(*lst);
+		if (lst1)
+			lst1 = ft_list_sort_time(lst1);
+	}
+//	ft_printf("lst : %s et lst->next : %s \n", (*lst)->name, (*lst)->next->name);
+
+//	ft_printf("lst1 : %s et lst1->next : %s et next next name %s\n", lst1->name, lst1->next->name, lst1->next->next->name);
 	if (((optionsss / 10) + 3) % 5 == 0)
+	{
 		ft_list_reverse(lst);
+		if (lst1)
+			ft_list_reverse(&lst1);
+	}
+	if (lst1 && count > 0)
+	{
+		if (lst2->next)
+			lst2->next->next = lst1;
+		else
+			lst2->next = lst1;
+	}
 }

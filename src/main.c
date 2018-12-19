@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:14:00 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 22:42:50 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:23:45 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ t_file_list		*ft_ls_list_files(char **av, int ac, int *i, int isfirst)
 		sort_args(av, ac, k, i);
 	while (av[k])
 	{
+		if (av[k][0] == '\0')
+		{
+			ft_ls_error(0, "fts_open", 0);
+			return (NULL);
+		}
 		if ((ft_ls_get_file("", av[k], &begin_list) == -1) && isfirst)
 			ft_ls_error(ERRNO, av[k], 0);
 		k++;
@@ -41,14 +46,16 @@ int			main(int ac, char **av)
 	int			options;
 	int			isfile;
 	int			count;
+//	int			isfirst;
 	t_file_list	*file;
 
 	if ((i = ft_ls_parsing(ac, av, &options)) == -1)
 		return (EXIT_FAILURE);
 	count = i;
 	file = ft_ls_list_files(av, ac, &count, 1);
+//	ft_printf("%d[][]", count);
 	if (count > 1)
-		ft_ls_display_files(&file, options, count - i- 1);
+		ft_ls_display_files(&file, options, count - i - 1);
 	isfile = (!file ? 1 : 0);
 	ft_ls_display(options, file, ac - i - 1, !isfile ? 2 : 1 );
 	ft_list_clear(&file);

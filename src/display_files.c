@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 22:49:55 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:24:21 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static void			display_simple_list(t_file_list *lst, int options, int count)
 {
 	(void) 			options;
 	int				i;
+	t_file_list		*lst1;
+
+	lst1 = lst;
 	i = 0;
 	while (lst && i != count)
 	{
@@ -56,24 +59,35 @@ static int			get_col_size(t_file_list *lst, int size[7], int options)
 	return (total_blocks);
 }
 
-static void			display_l_list(t_file_list *lst, int options, int count)
+static void			display_l_list(t_file_list *lst, int options, int count, int *isfirst)
 {
 	int				size[7] = {0};
 	int				total_blocks;
-	int				isfirst;
 	int				i;
+//	t_file_list		lst1;
 
 	total_blocks = get_col_size(lst, size, options);
-	isfirst = 1;
 	i = 0;
+/*	lst1 = *lst;
+	while (lst1.name != '\0')
+	{
+		lst1 = *lst1.next;
+		i++;
+	}
+	*/
+	
 	while (lst && i != count)
 	{
-		if (isfirst == 1)
+//	ft_printf("%d", *isfirst);
+		if (i + 1 > count)
+			(*isfirst)++;
+//	ft_printf("%d", *isfirst);
+		if (*isfirst == 1 && i != count)
 		{
 			ft_printf("total %d\n", total_blocks);
-			isfirst--;
 		}
-		display_ls_lx(lst, size, options);
+//		if (!(S_ISDIR(lst->st_mode)))
+			display_ls_lx(lst, size, options);
 		ft_putchar('\n');
 		lst = lst->next;
 		i++;
@@ -83,11 +97,14 @@ static void			display_l_list(t_file_list *lst, int options, int count)
 }
 void				ft_ls_display_files(t_file_list **lst, int options, int count)
 {
+	int			isfirst;
+
+	isfirst = 0;
 	ft_sort_list(lst, options, count);
 	if (((options / 10000) + 3) % 5 != 0)
 	{
 		display_simple_list(*lst, options, count);
 	}
 	else
-		display_l_list(*lst, options, count);
+		display_l_list(*lst, options, count, &isfirst);
 }
