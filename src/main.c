@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:14:00 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/19 19:23:45 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:54:29 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ t_file_list		*ft_ls_list_files(char **av, int ac, int *i, int isfirst)
 			ft_ls_error(0, "fts_open", 0);
 			return (NULL);
 		}
+			//ft_printf("|%s|\n", av[k]);
 		if ((ft_ls_get_file("", av[k], &begin_list) == -1) && isfirst)
+		{
 			ft_ls_error(ERRNO, av[k], 0);
+			(*i)--;
+		}
+//	ft_printf("  i %d    ", *i);
 		k++;
 	}
 	return (begin_list);
@@ -53,7 +58,6 @@ int			main(int ac, char **av)
 		return (EXIT_FAILURE);
 	count = i;
 	file = ft_ls_list_files(av, ac, &count, 1);
-//	ft_printf("%d[][]", count);
 	if (count > 1)
 		ft_ls_display_files(&file, options, count - i - 1);
 	isfile = (!file ? 1 : 0);

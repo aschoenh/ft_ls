@@ -6,7 +6,7 @@
 /*   By: mporzier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:37:13 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/18 18:45:00 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:35:37 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int		ft_ls_parsing(int ac, char **av, int *options)
 	k = 1;
 	while (k < ac && av[k][0] == '-' && av[k][1] != '\0')
 	{
-		if (av[k][1] == '-')
+		if (av[k][1] == '-' && !av[k][2])
 			return (k);
+		if (av[k][1] == '-' && av[k][2])
+			return (ft_ls_error(USAGE, av[k], 1));
 		while (av[k][i])
 		{
 			ret += ft_ls_parse_options(av[k][i], options);
@@ -84,7 +86,7 @@ int		ft_ls_error(int error, char *str, int index)
 		ft_putendl_fd(strerror(errno), 2);
 	}
 	if (error == USAGE || error == MALL_ERR)
-		exit(EXIT_FAILURE);
+		return (-1);
 	return (0);
 
 }

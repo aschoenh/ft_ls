@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:23:58 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/19 14:36:09 by aschoenh         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:16:45 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static t_file_list	*read_directory(char path[PATH_MAX], char file[NAME_MAX + 1]
 
 	new = NULL;
 	if (!(dir = opendir(path)))
+	{
+//		ft_printf("tee\n");
 		ft_ls_error(ERRNO, file, 0);
+	}
 	else
 	{
 		while ((struc = readdir(dir)))
