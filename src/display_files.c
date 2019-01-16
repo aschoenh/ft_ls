@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/20 15:55:18 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:28:19 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void			display_simple_list(t_file_list *lst, int options, int count)
 		ft_printf("%s\n", lst->name);
 		lst = lst->next;
 		i++;
+//		ft_printf("uiui   %s", lst->name);
 	}
 	if (lst && count)
 		ft_putchar('\n');

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 14:51:07 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/16 16:35:39 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void			display_ls_lx(t_file_list *file, int size[7], int options)
 		ft_printf("  %*lld", size[4], file->st_size);
 	else
 	{
-		ft_printf("   %*d", size[5], major(file->st_rdev));
-		ft_printf(",   %*d", size[6], minor(file->st_rdev));
+		ft_printf("  %*d", size[5], major(file->st_rdev));
+		ft_printf(", %*d", size[6], minor(file->st_rdev));
 	}
 	get_and_display_time(file);	
 	if (chmod[0] != 'l')
