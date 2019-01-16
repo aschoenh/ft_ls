@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:53:10 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/20 15:54:53 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/16 13:22:08 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void static		ft_swap(char **s1, char **s2)
 	*s2 = tmp;
 }
 
-int static		sort_types(char **av, int ac, int beg)
+static int		sort_types(char **av, int ac, int beg)
 {
 	int			i;
 	int			k;

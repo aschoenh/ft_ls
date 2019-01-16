@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/20 16:45:26 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/16 14:51:07 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,36 +49,47 @@ static void		get_and_display_chmod(t_file_list *file, char chmod[11])
 		chmod[3] = chmod[3] == '-' ? 'S' : 's';
 	if (S_ISGID & file->st_mode)
 		chmod[6] = chmod[6] == '-' ? 'S' : 's';
-	if (S_ISUID & file->st_mode)
+	if (S_ISVTX & file->st_mode)
 		chmod[9] = chmod[9] == '-' ? 'T' : 't';
 	ft_putstr(chmod);
 }
 
 static void		get_and_display_time(t_file_list *file)
 {
-	time_t		actual;
 	char		*t;
-
-	time(&actual);
-//	ft_printf("}{}%s{}{", act);
-//	ft_printf("'''%s'''", ctime(&(file->time)));
-//	ft_printf("===%d===", time - file->time);
-//	if ((actual - file->time) < ((365 / 2) * 86400) && actual - file->time > 0)
-//	{
-		t = ctime(&(file->time)) + 4;
-		ft_printf(" %.12s ", t);
-//	}
-/*	else
+	int			i;
+	
+	t = ctime(&(file->time)) + 4;
+	if (file->time > time(0))
 	{
-		
-		t = ctime(&(file->time)) + 4;
-		ft_printf(" %.6s ", t);
-		t += 15;
-		t = ft_strrev(t);
-		t += 1;
-		t = ft_strrev(t);
-		ft_printf("%s ", t);
-	}*/
+		ft_printf(" %.7s", t);
+		i = 16;
+		while (t[i] == ' ')
+			++i;
+		ft_putchar(' ');
+		while (t[i] != '\n')
+		{
+			ft_putchar(t[i]);
+			++i;
+		}
+		ft_putchar(' ');
+	}
+	else if (time(0) - file->time > ((365 / 2) * 86400))
+	{
+		ft_printf(" %.7s", t);
+		i = 15;
+		while (t[i] == ' ')
+			++i;
+		ft_putchar(' ');
+		while (t[i] != '\n')
+		{
+			ft_putchar(t[i]);
+			++i;
+		}
+		ft_putchar(' ');
+	}
+	else
+		ft_printf(" %.12s ", t);
 }
 
 void			display_ls_lx(t_file_list *file, int size[7], int options)

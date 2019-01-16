@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 15:02:30 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/20 15:17:05 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/16 14:43:49 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static t_file_list	*get_file(char *file, char *path, struct stat *stat)
 	elem->st_size = stat->st_size;
 	elem->st_rdev = stat->st_rdev;
 	elem->time = stat->st_mtimespec.tv_sec;
-	elem->time_set = stat->st_mtimespec.tv_nsec;
 	elem->st_blocks = stat->st_blocks;
 	ft_ls_get_path(path, file, elem->path);
 	elem->next = NULL;
