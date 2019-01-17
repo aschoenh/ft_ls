@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 15:02:30 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 14:43:49 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:13:25 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,13 @@ static t_file_list	*get_file(char *file, char *path, struct stat *stat)
 int					ft_ls_get_file(char path[PATH_MAX], char file[NAME_MAX + 1],
 										t_file_list **lst)
 {
-	char			elempath[PATH_MAX] = {0}; // on a le droit?
+	char			elempath[PATH_MAX];
 	struct stat		info;
+	int				i;
 
+	i = 0;
+	while (i < PATH_MAX)
+		elempath[i++] = 0;
 	if (!(ft_ls_get_path(path, file, elempath)))
 	{
 		ft_ls_error(1, file, 0);

@@ -6,27 +6,24 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 18:28:19 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:43:58 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void			display_simple_list(t_file_list *lst, int options, int count)
+static void			display_simple_list(t_file_list *lst, int count)
 {
-	(void) 			options;
 	int				i;
 	t_file_list		*lst1;
 
 	lst1 = lst;
 	i = 0;
-//	ft_printf("|||%d|", count);
 	while (lst && i != count)
 	{
 		ft_printf("%s\n", lst->name);
 		lst = lst->next;
 		i++;
-//		ft_printf("uiui   %s", lst->name);
 	}
 	if (lst && count)
 		ft_putchar('\n');
@@ -46,7 +43,7 @@ static int			get_col_size(t_file_list *lst, int size[7], int options)
 		size[2] = ft_max(ft_strlen(getpwuid(lst->st_uid)->pw_name), size[2]);
 		size[3] = ft_max(ft_strlen(getgrgid(lst->st_gid)->gr_name), size[3]);
 		if (!S_ISCHR(lst->st_mode))
-			len = ft_get_int_len(lst->st_size); 
+			len = ft_get_int_len(lst->st_size);
 		else
 		{
 			size[5] = ft_max(ft_get_int_len(major(lst->st_rdev)), size[5]);
@@ -61,35 +58,27 @@ static int			get_col_size(t_file_list *lst, int size[7], int options)
 	return (total_blocks);
 }
 
-static void			display_l_list(t_file_list *lst, int options, int count, int *isfirst)
+static void			display_l_list(t_file_list *lst, int options,
+						int count, int *isfirst)
 {
-	int				size[7] = {0};
+	int				size[7];
 	int				total_blocks;
 	int				i;
-//	t_file_list		lst1;
 
+	i = 7;
+	while (i >= 0)
+		size[i--] = 0;
 	total_blocks = get_col_size(lst, size, options);
 	i = 0;
-/*	lst1 = *lst;
-	while (lst1.name != '\0')
-	{
-		lst1 = *lst1.next;
-		i++;
-	}
-	*/
-	
 	while (lst && i != count)
 	{
-//	ft_printf("%d", *isfirst);
 		if (i + 1 > count)
 			(*isfirst)++;
-//	ft_printf("%d", *isfirst);
 		if (*isfirst == 1 && i != count)
 		{
 			ft_printf("total %d\n", total_blocks);
 		}
-//		if (!(S_ISDIR(lst->st_mode)))
-			display_ls_lx(lst, size, options);
+		display_ls_lx(lst, size, options);
 		ft_putchar('\n');
 		lst = lst->next;
 		i++;
@@ -97,7 +86,9 @@ static void			display_l_list(t_file_list *lst, int options, int count, int *isfi
 	if (lst && count)
 		ft_putchar('\n');
 }
-void				ft_ls_display_files(t_file_list **lst, int options, int count)
+
+void				ft_ls_display_files(t_file_list **lst, int options,
+						int count)
 {
 	int			isfirst;
 
@@ -105,7 +96,7 @@ void				ft_ls_display_files(t_file_list **lst, int options, int count)
 	ft_sort_list(lst, options, count);
 	if (((options / 10000) + 3) % 5 != 0)
 	{
-		display_simple_list(*lst, options, count);
+		display_simple_list(*lst, count);
 	}
 	else
 		display_l_list(*lst, options, count, &isfirst);

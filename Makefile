@@ -6,7 +6,7 @@
 #    By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 19:03:44 by rmarracc          #+#    #+#              #
-#    Updated: 2018/12/19 15:22:25 by aschoenh         ###   ########.fr        #
+#    Updated: 2019/01/17 16:09:59 by aschoenh         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(LFT_PATH)
-	$(CC) -o $(NAME) $(OBJ) -L$(LFT_PATH) -lft
+	$(CC) -o $(NAME) $(OBJ) -L$(LFT_PATH) -lft -fsanitize=address -g3
 
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c

@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:14:00 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 16:35:45 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:20:42 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,33 @@ t_file_list		*ft_ls_list_files(char **av, int ac, int *i, int isfirst)
 			ft_ls_error(0, "fts_open", 0);
 			return (NULL);
 		}
-			//ft_printf("|%s|\n", av[k]);
 		if ((ft_ls_get_file("", av[k], &begin_list) == -1) && isfirst)
 		{
 			ft_ls_error(ERRNO, av[k], 0);
 			(*i)--;
 		}
-//	ft_printf("  i %d    ", *i);
 		k++;
 	}
 	return (begin_list);
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	int			i;
 	int			options;
 	int			isfile;
 	int			count;
-//	int			isfirst;
 	t_file_list	*file;
 
 	if ((i = ft_ls_parsing(ac, av, &options)) == -1)
 		return (EXIT_FAILURE);
 	count = i;
-	file = ft_ls_list_files(av, ac, &count, 1);
+	if ((file = ft_ls_list_files(av, ac, &count, 1)) == NULL)
+		return (EXIT_FAILURE);
 	if (count > 1)
 		ft_ls_display_files(&file, options, count - i - 1);
 	isfile = (!file ? 1 : 0);
-	ft_ls_display(options, file, ac - i - 1, !isfile ? 2 : 1 );
+	ft_ls_display(options, file, ac - i - 1, !isfile ? 2 : 1);
 	ft_list_clear(&file);
 	return (EXIT_SUCCESS);
 }

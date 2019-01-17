@@ -6,11 +6,12 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:23:58 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 17:15:11 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:09:06 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
 static t_file_list	*read_directory(char path[PATH_MAX], char file[NAME_MAX + 1]
 					, int options)
 {
@@ -21,7 +22,6 @@ static t_file_list	*read_directory(char path[PATH_MAX], char file[NAME_MAX + 1]
 	new = NULL;
 	if (!(dir = opendir(path)))
 	{
-	//	ft_printf("tee\n");//////////////////////////
 		ft_ls_error(ERRNO, file, 0);
 	}
 	else
@@ -52,7 +52,8 @@ static void			display_path(char *path, int ac, int *isfirst)
 	}
 }
 
-void				ft_ls_display(int options, t_file_list *file, int ac, int isfirst)
+void				ft_ls_display(int options, t_file_list *file,
+		int ac, int isfirst)
 {
 	t_file_list		*lst;
 
@@ -63,9 +64,10 @@ void				ft_ls_display(int options, t_file_list *file, int ac, int isfirst)
 	{
 		while (lst)
 		{
-			if ((S_ISDIR(lst->st_mode)) && (isfirst || ft_strcmp(lst->name, ".")) && ft_strcmp(lst->name, ".."))
+			if ((S_ISDIR(lst->st_mode)) && (isfirst ||
+				ft_strcmp(lst->name, ".")) && ft_strcmp(lst->name, ".."))
 			{
-				display_path(lst->path, ac, &isfirst);			
+				display_path(lst->path, ac, &isfirst);
 				if ((file = read_directory(lst->path, lst->name, options)))
 				{
 					ft_ls_display_files(&file, options, -1);

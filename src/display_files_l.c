@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/16 16:35:39 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/17 17:50:17 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ static void		get_and_display_chmod(t_file_list *file, char chmod[11])
 	chmod[1] = (S_IRUSR & file->st_mode) ? 'r' : '-';
 	chmod[2] = (S_IWUSR & file->st_mode) ? 'w' : '-';
 	chmod[3] = (S_IXUSR & file->st_mode) ? 'x' : '-';
-	chmod[4] = (S_IRGRP & file->st_mode)? 'r' : '-';
-	chmod[5] = (S_IWGRP & file->st_mode)? 'w' : '-';
-	chmod[6] = (S_IXGRP & file->st_mode)? 'x' : '-';
-	chmod[7] = (S_IROTH & file->st_mode)? 'r' : '-';
-	chmod[8] = (S_IWOTH & file->st_mode)? 'w' : '-';
-	chmod[9] = (S_IXOTH & file->st_mode)? 'x' : '-';
+	chmod[4] = (S_IRGRP & file->st_mode) ? 'r' : '-';
+	chmod[5] = (S_IWGRP & file->st_mode) ? 'w' : '-';
+	chmod[6] = (S_IXGRP & file->st_mode) ? 'x' : '-';
+	chmod[7] = (S_IROTH & file->st_mode) ? 'r' : '-';
+	chmod[8] = (S_IWOTH & file->st_mode) ? 'w' : '-';
+	chmod[9] = (S_IXOTH & file->st_mode) ? 'x' : '-';
 	chmod[10] = '\0';
 	if (S_ISUID & file->st_mode)
 		chmod[3] = chmod[3] == '-' ? 'S' : 's';
@@ -58,7 +58,7 @@ static void		get_and_display_time(t_file_list *file)
 {
 	char		*t;
 	int			i;
-	
+
 	t = ctime(&(file->time)) + 4;
 	if (file->time > time(0))
 	{
