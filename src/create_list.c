@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 15:02:30 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:13:25 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:38:42 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 #include <stdlib.h>
 #include <errno.h>
 #include <stdio.h>

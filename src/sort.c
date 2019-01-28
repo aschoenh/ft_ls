@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:05:33 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:45:40 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:09:59 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 
 void				ft_list_reverse(t_file_list **begin_list)
 {
@@ -60,32 +60,6 @@ static t_file_list	*ft_list_sort_time(t_file_list *lst)
 	return (lst);
 }
 
-t_file_list			*ft_list_sort_block(t_file_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	if (lst->next && lst->st_blocks > lst->next->st_blocks)
-		lst = ft_lst_swap(lst, lst->next);
-	else if (lst->next && lst->st_blocks == lst->next->st_blocks)
-		if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
-			lst = ft_lst_swap(lst, lst->next);
-	lst->next = ft_list_sort_block(lst->next);
-	if (lst->next && lst->st_blocks > lst->next->st_blocks)
-	{
-		lst = ft_lst_swap(lst, lst->next);
-		lst->next = ft_list_sort_block(lst->next);
-	}
-	else if (lst->next && lst->st_blocks == lst->next->st_blocks)
-	{
-		if (lst->next && ft_strcmp(lst->name, lst->next->name) > 0)
-		{
-			lst = ft_lst_swap(lst, lst->next);
-			lst->next = ft_list_sort_block(lst->next);
-		}
-	}
-	return (lst);
-}
-
 static t_file_list	*ft_list_sort_ascii(t_file_list *lst)
 {
 	if (!lst)
@@ -101,45 +75,47 @@ static t_file_list	*ft_list_sort_ascii(t_file_list *lst)
 	return (lst);
 }
 
-void				ft_sort_list(t_file_list **lst, int options, int count)
+static t_file_list	*ft_pre_sort_list(t_file_list ***lst, t_file_list **lst1,
+						int count)
 {
-	int				optionss;
-	int				optionsss;
-	t_file_list		*lst1;
 	t_file_list		*lst2;
 	int				i;
 
+	lst2 = NULL;
 	i = 0;
+	*lst1 = **lst;
+	lst2 = *lst1;
+	while (*lst1 && i < count && count > 0)
+	{
+		if (i < count)
+			*lst1 = (*lst1)->next;
+		i++;
+	}
+	while (lst2 && --i && count > 0)
+		lst2 = lst2->next;
+	lst2->next = NULL;
+	return (lst2);
+}
+
+void				ft_sort_list(t_file_list **lst, int options, int count)
+{
+	t_file_list		*lst1;
+	t_file_list		*lst2;
+
 	lst1 = NULL;
 	if (count > 0)
-	{
-	lst1 = *lst;
-	lst2 = lst1;
-		while (lst1 && i < count && count > 0)
-		{
-			if (i < count)
-				lst1 = lst1->next;
-			i++;
-		}
-		while (lst2 && --i && count > 0)
-			lst2 = lst2->next;
-		lst2->next = NULL;
-	}
-	optionss = options;
-	optionsss = options;
+		lst2 = ft_pre_sort_list(&lst, &lst1, count);
 	if (count < 1)
 		*lst = ft_list_sort_ascii(*lst);
-	if ((optionss + 3) % 5 == 0)
+	if ((options + 3) % 5 == 0)
 	{
 		*lst = ft_list_sort_time(*lst);
-		if (lst1)
-			lst1 = ft_list_sort_time(lst1);
+		lst1 ? ft_list_sort_time(lst1) : NULL;
 	}
-	if (((optionsss / 10) + 3) % 5 == 0)
+	if (((options / 10) + 3) % 5 == 0)
 	{
 		ft_list_reverse(lst);
-		if (lst1)
-			ft_list_reverse(&lst1);
+		lst1 ? ft_list_reverse(&lst1) : NULL;
 	}
 	if (lst1 && count > 0)
 	{

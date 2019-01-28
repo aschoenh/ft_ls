@@ -6,14 +6,14 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 16:39:44 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:18:07 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:42:21 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <dirent.h>
 # include <sys/stat.h>
 # include <pwd.h>
@@ -68,4 +68,4 @@ t_file_list				*ft_lst_swap(t_file_list *file1, t_file_list *file2);
 int						ft_get_int_len(int n);
 int						ft_max(int a, int b);
 
-# endif
+#endif

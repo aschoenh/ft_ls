@@ -6,7 +6,7 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 11:16:17 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/14 13:30:38 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/18 13:11:38 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,6 @@ void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void(*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-
-/*
- *GNL*
- */
 
 int				get_next_line(const int fd, char **line);
 size_t			ft_strlen_eol(char *s);

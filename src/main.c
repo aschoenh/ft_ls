@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 15:14:00 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:20:42 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:08:43 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -57,7 +57,9 @@ int				main(int ac, char **av)
 	if ((file = ft_ls_list_files(av, ac, &count, 1)) == NULL)
 		return (EXIT_FAILURE);
 	if (count > 1)
+	{
 		ft_ls_display_files(&file, options, count - i - 1);
+	}
 	isfile = (!file ? 1 : 0);
 	ft_ls_display(options, file, ac - i - 1, !isfile ? 2 : 1);
 	ft_list_clear(&file);

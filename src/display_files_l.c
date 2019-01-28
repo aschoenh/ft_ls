@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 18:37:20 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:50:17 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:39:27 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 
 static char		get_file_type(int m)
 {
@@ -60,24 +60,10 @@ static void		get_and_display_time(t_file_list *file)
 	int			i;
 
 	t = ctime(&(file->time)) + 4;
-	if (file->time > time(0))
+	if (file->time > time(0) || time(0) - file->time > ((365 / 2) * 86400))
 	{
 		ft_printf(" %.7s", t);
-		i = 16;
-		while (t[i] == ' ')
-			++i;
-		ft_putchar(' ');
-		while (t[i] != '\n')
-		{
-			ft_putchar(t[i]);
-			++i;
-		}
-		ft_putchar(' ');
-	}
-	else if (time(0) - file->time > ((365 / 2) * 86400))
-	{
-		ft_printf(" %.7s", t);
-		i = 15;
+		i = file->time > time(0) ? 16 : 15;
 		while (t[i] == ' ')
 			++i;
 		ft_putchar(' ');
@@ -94,11 +80,9 @@ static void		get_and_display_time(t_file_list *file)
 
 void			display_ls_lx(t_file_list *file, int size[7], int options)
 {
-	int			i;
 	char		chmod[11];
 	char		link[NAME_MAX + 1];
 
-	i = 0;
 	if (((options / 100000) + 3) % 5 == 0)
 		ft_printf("%*hu", size[0], file->st_blocks);
 	get_and_display_chmod(file, chmod);
@@ -112,7 +96,7 @@ void			display_ls_lx(t_file_list *file, int size[7], int options)
 		ft_printf("  %*d", size[5], major(file->st_rdev));
 		ft_printf(", %*d", size[6], minor(file->st_rdev));
 	}
-	get_and_display_time(file);	
+	get_and_display_time(file);
 	if (chmod[0] != 'l')
 		ft_printf("%s", file->name);
 	else

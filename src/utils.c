@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:25:31 by aschoenh          #+#    #+#             */
-/*   Updated: 2018/12/17 14:49:00 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:40:15 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_ls.h>
+#include <../include/ft_ls.h>
 
 int				ft_max(int a, int b)
 {

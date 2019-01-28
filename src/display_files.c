@@ -6,22 +6,27 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 16:32:02 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:43:58 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/28 14:55:17 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 
 static void			display_simple_list(t_file_list *lst, int count)
 {
 	int				i;
 	t_file_list		*lst1;
+	int				j;
 
 	lst1 = lst;
 	i = 0;
 	while (lst && i != count)
 	{
-		ft_printf("%s\n", lst->name);
+		j = ft_strlen(lst->path);
+		if ((!(ft_strcmp(lst->name, ".")) && (lst->path[j - 1] == '.' && lst->path[j - 2] == '/')) ||
+				(ft_strcmp(lst->name, ".")))
+			ft_printf("%s\n", lst->name);
+		//	ft_printf("path :              %s\n", lst->path);
 		lst = lst->next;
 		i++;
 	}

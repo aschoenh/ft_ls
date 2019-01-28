@@ -6,13 +6,13 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 16:53:10 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 15:14:52 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/28 14:07:36 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 
-void static		ft_swap(char **s1, char **s2)
+static void		ft_swap(char **s1, char **s2)
 {
 	void		*tmp;
 
@@ -27,28 +27,16 @@ static int		sort_types(char **av, int ac, int beg)
 	int			k;
 	struct stat st[ac];
 
-	i = beg;
-	while (i < ac)
-	{
+	i = beg - 1;
+	while (++i < ac)
 		stat(av[i], &st[i]);
-		i++;
-	}
 	i = beg;
 	while (!(S_ISDIR(st[i].st_mode)))
 		i++;
-	k = i++;
-	while (i < ac)
-	{
-		if (!(S_ISDIR(st[i].st_mode)))
-		{
-			if (i != k)
-			{
-				ft_swap(&av[i], &av[k]);
-				k++;
-			}
-		}
-			i++;
-	}
+	k = i;
+	while (++i < ac)
+		if (!(S_ISDIR(st[i].st_mode)) && i != k)
+			ft_swap(&av[i], &av[k++]);
 	i = beg;
 	while (i < ac)
 	{
@@ -63,7 +51,6 @@ static int		sort_types(char **av, int ac, int beg)
 
 int				sort_args(char **av, int ac, int i, int *count)
 {
-
 	*count = sort_types(av, ac, i);
 	while (i < *count - 1)
 	{

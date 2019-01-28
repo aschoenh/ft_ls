@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/17 17:13:58 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:14:23 by aschoenh         ###   ########.fr       */
+/*   Created: 2019/01/18 13:14:12 by aschoenh          #+#    #+#             */
+/*   Updated: 2019/01/18 15:39:55 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 #include <errno.h>
 #include <string.h>
 
@@ -68,7 +68,6 @@ int		ft_ls_parse_options(char flag, int *options)
 	return (0);
 }
 
-
 int		ft_ls_error(int error, char *str, int index)
 {
 	if (error == USAGE)
@@ -88,5 +87,4 @@ int		ft_ls_error(int error, char *str, int index)
 	if (error == USAGE || error == MALL_ERR)
 		return (-1);
 	return (0);
-
 }

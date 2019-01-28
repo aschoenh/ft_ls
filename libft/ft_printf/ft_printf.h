@@ -6,7 +6,7 @@
 /*   By: rmarracc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 11:57:49 by rmarracc          #+#    #+#             */
-/*   Updated: 2018/12/07 13:34:34 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:41:44 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef struct	s_arg
 void			ft_init_arg(t_arg *flag);
 int				ft_printf(const char *fmt, ...);
 void			ft_parse_options(char c, t_arg *flag);
-int				ft_parse_precision(const char *fmt, t_arg *flag, int i, va_list ap);
+int				ft_parse_precision(const char *fmt, t_arg *flag,
+					int i, va_list ap);
 int				ft_parse_lenght(const char *fmt, t_arg *flag, int i);
 int				ft_is_arg1(char c);
 int				ft_is_arg2(char c);

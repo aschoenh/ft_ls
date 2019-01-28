@@ -6,11 +6,11 @@
 /*   By: aschoenh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/10 15:23:58 by aschoenh          #+#    #+#             */
-/*   Updated: 2019/01/17 17:09:06 by aschoenh         ###   ########.fr       */
+/*   Updated: 2019/01/22 16:09:45 by aschoenh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "../include/ft_ls.h"
 
 static t_file_list	*read_directory(char path[PATH_MAX], char file[NAME_MAX + 1]
 					, int options)
